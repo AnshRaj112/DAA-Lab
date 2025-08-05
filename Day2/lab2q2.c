@@ -36,22 +36,23 @@ int main(int argc, char* argv[]) {
     
     int num1, num2;
     int pair_count = 0;
+    int ret;
     
     printf("Finding GCD of number pairs...\n");
     printf("Reading from: %s\n", input_file);
     printf("Writing to: %s\n\n", output_file);
     
     // Read pairs of numbers and find their GCD
-    while (fscanf(input, "%d %d", &num1, &num2) == 2) {
-        int result = gcd(num1, num2);
-        
-        // Write to output file
-        fprintf(output, "The GCD of %d and %d is %d\n", num1, num2, result);
-        
-        // Display on terminal
-        printf("The GCD of %d and %d is %d\n", num1, num2, result);
-        
-        pair_count++;
+    while ((ret = fscanf(input, "%d %d", &num1, &num2)) != EOF) {
+        if (ret == 2) {
+            int result = gcd(num1, num2);
+            fprintf(output, "The GCD of %d and %d is %d\n", num1, num2, result);
+            printf("The GCD of %d and %d is %d\n", num1, num2, result);
+            pair_count++;
+        } else {
+            fprintf(stderr, "Warning: Incomplete pair at the end of input file. Skipping.\n");
+            break;
+        }
     }
     
     fclose(input);
