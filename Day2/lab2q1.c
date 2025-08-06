@@ -15,30 +15,50 @@ void decimalToBinary(int decimal, char* binary, int* index) {
 
 // Function to convert decimal to 16-bit binary string
 void getBinaryString(int decimal, char* binary) {
-    int index = 0;
-    decimalToBinary(decimal, binary, &index);
-    
-    // Pad with leading zeros to make it 16 bits
-    int len = strlen(binary);
-    if (len < 16) {
-        memmove(binary + (16 - len), binary, len + 1);
-        for (int i = 0; i < 16 - len; i++) {
-            binary[i] = '0';
-        }
+    // Initialize binary array with zeros
+    for (int i = 0; i < 16; i++) {
+        binary[i] = '0';
     }
     binary[16] = '\0';
+    
+    // Handle special case for 0
+    if (decimal == 0) {
+        return;
+    }
+    
+    // Create a temporary array to store the binary digits
+    char temp[32];
+    int index = 0;
+    
+    // Convert to binary using recursion
+    decimalToBinary(decimal, temp, &index);
+    temp[index] = '\0';
+    
+    // Copy the binary digits to the result array, right-aligned
+    int temp_len = strlen(temp);
+    int start_pos = 16 - temp_len;
+    
+    for (int i = 0; i < temp_len; i++) {
+        binary[start_pos + i] = temp[i];
+    }
 }
 
 int main(int argc, char* argv[]) {
     if (argc != 4) {
         printf("Usage: %s <n> <input_file> <output_file>\n", argv[0]);
-        printf("Example: %s 150 inDec.dat outBin.dat\n", argv[0]);
+        printf("Example: %s 3 inDec.dat outBin.dat\n", argv[0]);
         return 1;
     }
     
     int n = atoi(argv[1]);
     char* input_file = argv[2];
     char* output_file = argv[3];
+    
+    // Validate n
+    if (n <= 0) {
+        printf("Error: n must be a positive integer\n");
+        return 1;
+    }
     
     // Open input file
     FILE* input = fopen(input_file, "r");
