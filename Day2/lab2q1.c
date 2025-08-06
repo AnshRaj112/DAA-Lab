@@ -1,106 +1,47 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 
-// Function to convert decimal to binary using recursion
-void decimalToBinary(int decimal, char* binary, int* index) {
-    if (decimal == 0) {
-        return;
-    }
-    
-    decimalToBinary(decimal / 2, binary, index);
-    binary[*index] = (decimal % 2) + '0';
-    (*index)++;
-}
-
-// Function to convert decimal to 16-bit binary string
 void getBinaryString(int decimal, char* binary) {
-    // Initialize binary array with zeros
-    for (int i = 0; i < 16; i++) {
-        binary[i] = '0';
+    for (int i = 15; i >= 0; i--) {
+        binary[i] = (decimal % 2) + '0';
+        decimal /= 2;
     }
     binary[16] = '\0';
-    
-    // Handle special case for 0
-    if (decimal == 0) {
-        return;
-    }
-    
-    // Create a temporary array to store the binary digits
-    char temp[32];
-    int index = 0;
-    
-    // Convert to binary using recursion
-    decimalToBinary(decimal, temp, &index);
-    temp[index] = '\0';
-    
-    // Copy the binary digits to the result array, right-aligned
-    int temp_len = strlen(temp);
-    int start_pos = 16 - temp_len;
-    
-    for (int i = 0; i < temp_len; i++) {
-        binary[start_pos + i] = temp[i];
-    }
 }
 
 int main(int argc, char* argv[]) {
     if (argc != 4) {
         printf("Usage: %s <n> <input_file> <output_file>\n", argv[0]);
-        printf("Example: %s 3 inDec.dat outBin.dat\n", argv[0]);
         return 1;
     }
-    
+
     int n = atoi(argv[1]);
-    char* input_file = argv[2];
-    char* output_file = argv[3];
-    
-    // Validate n
     if (n <= 0) {
         printf("Error: n must be a positive integer\n");
         return 1;
     }
-    
-    // Open input file
-    FILE* input = fopen(input_file, "r");
-    if (input == NULL) {
-        printf("Error: Cannot open input file %s\n", input_file);
+
+    FILE* input = fopen(argv[2], "r");
+    FILE* output = fopen(argv[3], "w");
+    if (!input || !output) {
+        printf("Error: Unable to open input or output file.\n");
+        if (input) fclose(input);
+        if (output) fclose(output);
         return 1;
     }
-    
-    // Open output file
-    FILE* output = fopen(output_file, "w");
-    if (output == NULL) {
-        printf("Error: Cannot create output file %s\n", output_file);
-        fclose(input);
-        return 1;
-    }
-    
-    int decimal;
-    int count = 0;
-    char binary[17]; // 16 bits + null terminator
-    
-    printf("Converting first %d decimal numbers to binary...\n", n);
-    printf("Reading from: %s\n", input_file);
-    printf("Writing to: %s\n\n", output_file);
-    
-    // Read decimal numbers and convert to binary
+
+    int decimal, count = 0;
+    char binary[17];
+
     while (count < n && fscanf(input, "%d", &decimal) == 1) {
         getBinaryString(decimal, binary);
-        
-        // Write to output file
         fprintf(output, "The binary equivalent of %d is %s\n", decimal, binary);
-        
-        // Display on terminal
         printf("The binary equivalent of %d is %s\n", decimal, binary);
-        
         count++;
     }
-    
+
     fclose(input);
     fclose(output);
-    
     printf("\nConversion completed! %d numbers processed.\n", count);
-    printf("Results saved to: %s\n", output_file);
-    
     return 0;
-} 
+}
