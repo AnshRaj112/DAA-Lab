@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-// Recursive function to calculate GCD
 int gcd(int a, int b) {
     if (b == 0) {
         return a;
