@@ -32,9 +32,6 @@ int main() {
     int n;
     int arr[1000]; // Assuming max size of 1000
     
-    printf("Enter how many numbers you want to read from file: ");
-    scanf("%d", &n);
-    
     // Open file for reading
     file = fopen("input.txt", "r");
     if (file == NULL) {
@@ -42,7 +39,11 @@ int main() {
         return 1;
     }
     
+    // Read size of array from first line
+    fscanf(file, "%d", &n);
+    
     // Read array elements
+    printf("Reading %d elements from file:\n", n);
     printf("The content of the array: ");
     for (int i = 0; i < n; i++) {
         fscanf(file, "%d", &arr[i]);

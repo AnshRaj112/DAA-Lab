@@ -2,19 +2,24 @@ CC = gcc
 CFLAGS = -Wall -Wextra -std=c99
 
 # Targets
+.PHONY: all clean test test1 test2 test3 test4 help force
+
 all: 1.1_second_smallest_largest 1.2_prefix_sum 1.3_duplicate_analysis 1.4_array_rotation
 
+# Force recompilation target
+force: clean all
+
 1.1_second_smallest_largest: 1.1_second_smallest_largest.c
-	$(CC) $(CFLAGS) -o 1.1_second_smallest_largest 1.1_second_smallest_largest.c
+	$(CC) $(CFLAGS) 1.1_second_smallest_largest.c -o 1.1_second_smallest_largest 
 
 1.2_prefix_sum: 1.2_prefix_sum.c
-	$(CC) $(CFLAGS) -o 1.2_prefix_sum 1.2_prefix_sum.c
+	$(CC) $(CFLAGS) 1.2_prefix_sum.c -o 1.2_prefix_sum
 
 1.3_duplicate_analysis: 1.3_duplicate_analysis.c
-	$(CC) $(CFLAGS) -o 1.3_duplicate_analysis 1.3_duplicate_analysis.c
+	$(CC) $(CFLAGS) 1.3_duplicate_analysis.c -o 1.3_duplicate_analysis
 
 1.4_array_rotation: 1.4_array_rotation.c
-	$(CC) $(CFLAGS) -o 1.4_array_rotation 1.4_array_rotation.c
+	$(CC) $(CFLAGS) 1.4_array_rotation.c -o 1.4_array_rotation
 
 # Test targets
 test1: 1.1_second_smallest_largest
@@ -45,6 +50,7 @@ clean:
 help:
 	@echo "Available targets:"
 	@echo "  all     - Compile all programs"
+	@echo "  force   - Force recompilation (clean + all)"
 	@echo "  test1   - Test second smallest/largest finder"
 	@echo "  test2   - Test prefix sum calculator"
 	@echo "  test3   - Test duplicate analysis"
@@ -61,6 +67,4 @@ help:
 	@echo ""
 	@echo "Input files:"
 	@echo "  input.txt - Used by programs 1.1, 1.2, 1.3"
-	@echo "  rotation_input.txt - Used by program 1.4"
-
-.PHONY: all test test1 test2 test3 test4 clean help 
+	@echo "  rotation_input.txt - Used by program 1.4" 
