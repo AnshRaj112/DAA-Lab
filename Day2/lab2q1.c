@@ -1,12 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void getBinaryString(int decimal, char* binary) {
-    for (int i = 15; i >= 0; i--) {
-        binary[i] = (decimal % 2) + '0';
-        decimal /= 2;
+void getBinaryStringRecursive(int decimal, char* binary, int index) {
+    if (index < 0) {
+        binary[16] = '\0';
+        return;
     }
-    binary[16] = '\0';
+    getBinaryStringRecursive(decimal / 2, binary, index - 1);
+    binary[index] = (decimal % 2) + '0';
 }
 
 int main(int argc, char* argv[]) {
@@ -34,7 +35,7 @@ int main(int argc, char* argv[]) {
     char binary[17];
 
     while (count < n && fscanf(input, "%d", &decimal) == 1) {
-        getBinaryString(decimal, binary);
+        getBinaryStringRecursive(decimal, binary);
         fprintf(output, "The binary equivalent of %d is %s\n", decimal, binary);
         printf("The binary equivalent of %d is %s\n", decimal, binary);
         count++;
