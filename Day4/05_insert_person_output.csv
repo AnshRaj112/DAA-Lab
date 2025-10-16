@@ -1,0 +1,10 @@
+Operation,ID,Name,Age,Height,Weight_Pounds,Heap_Type,Heap_Size
+New_Person,11,Aditi Guin,1000,-1000,1000,Max_Heap_Weight,8
+Heap_Element,11,Aditi Guin,1000,-1000,1000,Max_Heap_Weight,8
+Heap_Element,2,Priya_Kumari,63,78,240,Max_Heap_Weight,8
+Heap_Element,0,Adarsh_Hota,39,77,231,Max_Heap_Weight,8
+Heap_Element,3,Dorothy_Helton,47,72,229,Max_Heap_Weight,8
+Heap_Element,1,Levi_Maier,56,77,129,Max_Heap_Weight,8
+Heap_Element,6,Norma_Webster,23,75,145,Max_Heap_Weight,8
+Heap_Element,5,Erica_Anyan,38,73,102,Max_Heap_Weight,8
+Heap_Element,4,Florence_Smith,24,75,171,Max_Heap_Weight,8

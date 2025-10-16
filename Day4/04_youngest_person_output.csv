@@ -1,0 +1,8 @@
+Analysis_Type,Value,Unit,Details
+Youngest_Person_ID,6,ID,Person with minimum age
+Youngest_Person_Name,Norma_Webster,Name,Full name of youngest person
+Youngest_Person_Age,23,Years,Minimum age in the dataset
+Youngest_Person_Height,75,Inches,Height of youngest person
+Youngest_Person_Weight_Pounds,145,Pounds,Weight in pounds
+Youngest_Person_Weight_KG,65.77,Kilograms,Converted weight
+Weight_Conversion_Factor,0.453592,KG/Pound,Standard conversion factor

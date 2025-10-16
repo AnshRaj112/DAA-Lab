@@ -1,0 +1,8 @@
+Heap_Index,ID,Name,Age,Height,Weight_Pounds,Heap_Level
+0,6,Norma_Webster,23,75,145,Root
+1,4,Florence_Smith,24,75,171,Level_1
+2,5,Erica_Anyan,38,73,102,Level_1
+3,3,Dorothy_Helton,47,72,229,Level_2
+4,1,Levi_Maier,56,77,129,Level_2
+5,0,Adarsh_Hota,39,77,231,Level_2
+6,2,Priya_Kumari,63,78,240,Level_2
