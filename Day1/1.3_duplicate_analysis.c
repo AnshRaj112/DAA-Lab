@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void analyzeDuplicates(int arr[], int n) {
+void analyzeDuplicates_1653(int arr[], int n) {
     int count[1000] = {0}; // Assuming elements are < 1000
     int totalDuplicates = 0;
     int mostRepeating = arr[0];
@@ -54,7 +54,7 @@ int main() {
     fclose(file);
     
     // Analyze duplicates
-    analyzeDuplicates(arr, n);
+    analyzeDuplicates_1653(arr, n);
     
     return 0;
 } 

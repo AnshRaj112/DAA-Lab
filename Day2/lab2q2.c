@@ -1,11 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int gcd(int a, int b) {
+int gcd_1653(int a, int b) {
     if (b == 0) {
         return a;
     } else {
-        return gcd(b, a % b);
+        return gcd_1653(b, a % b);
     }
 }
 
@@ -30,7 +30,7 @@ int main(int argc, char* argv[]) {
 
     int num1, num2, count = 0;
     while (fscanf(input, "%d %d", &num1, &num2) == 2) {
-        fprintf(output, "GCD of %d and %d is %d\n", num1, num2, gcd(num1, num2));
+        fprintf(output, "GCD of %d and %d is %d\n", num1, num2, gcd_1653(num1, num2));
         count++;
     }
 

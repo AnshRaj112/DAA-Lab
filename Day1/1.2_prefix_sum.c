@@ -1,14 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void calculatePrefixSum(int arr[], int prefixSum[], int n) {
+void calculatePrefixSum_1653(int arr[], int prefixSum[], int n) {
     prefixSum[0] = arr[0];
     for (int i = 1; i < n; i++) {
         prefixSum[i] = prefixSum[i-1] + arr[i];
     }
 }
 
-void printArray(int arr[], int n, char *name) {
+void printArray_1653(int arr[], int n, char *name) {
     printf("%s: ", name);
     for (int i = 0; i < n; i++) {
         printf("%d ", arr[i]);
@@ -31,11 +31,11 @@ int main() {
     }
     
     // Calculate prefix sum
-    calculatePrefixSum(arr, prefixSum, n);
+    calculatePrefixSum_1653(arr, prefixSum, n);
     
     // Display results
-    printArray(arr, n, "Input Array");
-    printArray(prefixSum, n, "Output Array");
+    printArray_1653(arr, n, "Input Array");
+    printArray_1653(prefixSum, n, "Output Array");
     
     return 0;
 } 

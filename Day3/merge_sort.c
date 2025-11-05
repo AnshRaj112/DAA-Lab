@@ -7,7 +7,7 @@
 
 long long comparison_count = 0;
 
-void merge(int arr[], int left, int mid, int right) {
+void merge_1653(int arr[], int left, int mid, int right) {
     int i, j, k;
     int n1 = mid - left + 1;
     int n2 = right - mid;
@@ -29,16 +29,16 @@ void merge(int arr[], int left, int mid, int right) {
     while (j < n2) arr[k++] = R[j++];
 }
 
-void mergeSort(int arr[], int left, int right) {
+void mergeSort_1653(int arr[], int left, int right) {
     if (left < right) {
         int mid = left + (right - left) / 2;
-        mergeSort(arr, left, mid);
-        mergeSort(arr, mid + 1, right);
-        merge(arr, left, mid, right);
+        mergeSort_1653(arr, left, mid);
+        mergeSort_1653(arr, mid + 1, right);
+        merge_1653(arr, left, mid, right);
     }
 }
 
-int readFromFile(const char* filename, int arr[]) {
+int readFromFile_1653(const char* filename, int arr[]) {
     FILE* file = fopen(filename, "r");
     if (!file) {
         printf("Error: Cannot open file %s\n", filename);
@@ -51,7 +51,7 @@ int readFromFile(const char* filename, int arr[]) {
     return count;
 }
 
-void writeToFile(const char* filename, int arr[], int size) {
+void writeToFile_1653(const char* filename, int arr[], int size) {
     FILE* file = fopen(filename, "w");
     if (!file) {
         printf("Error: Cannot create file %s\n", filename);
@@ -62,12 +62,12 @@ void writeToFile(const char* filename, int arr[], int size) {
     fclose(file);
 }
 
-void printArray(int arr[], int size) {
+void printArray_1653(int arr[], int size) {
     for (int i = 0; i < size; i++) printf("%d ", arr[i]);
     printf("\n");
 }
 
-void generateTestFiles() {
+void generateTestFiles_1653() {
     FILE* asce = fopen("inAsce.dat", "w");
     for (int i = 1; i <= 400; i++) fprintf(asce, "%d ", i * 10);
     fclose(asce);
@@ -85,7 +85,7 @@ void generateTestFiles() {
 int main() {
     int arr[MAX_SIZE], size;
 
-    generateTestFiles();
+    generateTestFiles_1653();
 
     while (1) {
         printf("\nMAIN MENU (MERGE SORT)\n");
@@ -122,20 +122,20 @@ int main() {
                 continue;
         }
 
-        size = readFromFile(input_file, arr);
+        size = readFromFile_1653(input_file, arr);
         if (size == -1) continue;
 
         printf("\nBefore Sorting:\n");
-        printArray(arr, size);
+        printArray_1653(arr, size);
 
         comparison_count = 0;
 
-        mergeSort(arr, 0, size - 1);
+        mergeSort_1653(arr, 0, size - 1);
 
         printf("After Sorting:\n");
-        printArray(arr, size);
+        printArray_1653(arr, size);
 
-        writeToFile(output_file, arr, size);
+        writeToFile_1653(output_file, arr, size);
 
         printf("Number of Comparisons: %lld\n", comparison_count);
     }

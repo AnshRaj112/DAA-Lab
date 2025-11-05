@@ -7,7 +7,7 @@
 #define INF INT_MAX
 
 // Function to read adjacency matrix from file
-void readAdjacencyMatrix(int n, int adj[MAX_VERTICES][MAX_VERTICES], const char* filename) {
+void readAdjacencyMatrix_1653(int n, int adj[MAX_VERTICES][MAX_VERTICES], const char* filename) {
     FILE* file = fopen(filename, "r");
     if (file == NULL) {
         printf("Error: Cannot open file %s\n", filename);
@@ -26,7 +26,7 @@ void readAdjacencyMatrix(int n, int adj[MAX_VERTICES][MAX_VERTICES], const char*
 }
 
 // Function to find minimum key vertex not in MST
-int minKey(int n, int key[], bool mstSet[]) {
+int minKey_1653(int n, int key[], bool mstSet[]) {
     int min = INF, min_index;
     
     for (int v = 0; v < n; v++) {
@@ -40,7 +40,7 @@ int minKey(int n, int key[], bool mstSet[]) {
 }
 
 // Prim's algorithm implementation
-void primMST(int n, int adj[MAX_VERTICES][MAX_VERTICES], int start, int mst[MAX_VERTICES][MAX_VERTICES]) {
+void primMST_1653(int n, int adj[MAX_VERTICES][MAX_VERTICES], int start, int mst[MAX_VERTICES][MAX_VERTICES]) {
     int parent[MAX_VERTICES];
     int key[MAX_VERTICES];
     bool mstSet[MAX_VERTICES];
@@ -62,7 +62,7 @@ void primMST(int n, int adj[MAX_VERTICES][MAX_VERTICES], int start, int mst[MAX_
     // The MST will have n vertices
     for (int count = 0; count < n - 1; count++) {
         // Pick the minimum key vertex from the set of vertices not yet included in MST
-        int u = minKey(n, key, mstSet);
+        int u = minKey_1653(n, key, mstSet);
         
         // Add the picked vertex to the MST Set
         mstSet[u] = true;
@@ -92,7 +92,7 @@ void primMST(int n, int adj[MAX_VERTICES][MAX_VERTICES], int start, int mst[MAX_
 }
 
 // Function to calculate total weight of MST
-int calculateTotalWeight(int n, int mst[MAX_VERTICES][MAX_VERTICES]) {
+int calculateTotalWeight_1653(int n, int mst[MAX_VERTICES][MAX_VERTICES]) {
     int totalWeight = 0;
     for (int i = 0; i < n; i++) {
         for (int j = i + 1; j < n; j++) {
@@ -105,7 +105,7 @@ int calculateTotalWeight(int n, int mst[MAX_VERTICES][MAX_VERTICES]) {
 }
 
 // Function to display adjacency matrix
-void displayMatrix(int n, int matrix[MAX_VERTICES][MAX_VERTICES]) {
+void displayMatrix_1653(int n, int matrix[MAX_VERTICES][MAX_VERTICES]) {
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < n; j++) {
             printf("%d ", matrix[i][j]);
@@ -127,16 +127,16 @@ int main() {
     start--; // Convert to 0-based indexing
     
     // Read adjacency matrix from file
-    readAdjacencyMatrix(n, adj, "inUnAdjMat.dat");
+    readAdjacencyMatrix_1653(n, adj, "inUnAdjMat.dat");
     
     // Apply Prim's algorithm
-    primMST(n, adj, start, mst);
+    primMST_1653(n, adj, start, mst);
     
     // Display MST adjacency matrix
-    displayMatrix(n, mst);
+    displayMatrix_1653(n, mst);
     
     // Calculate and display total weight
-    int totalWeight_1653 = calculateTotalWeight(n, mst);
+    int totalWeight_1653 = calculateTotalWeight_1653(n, mst);
     printf("Total Weight of the Spanning Tree: %d\n", totalWeight_1653);
     
     return 0;

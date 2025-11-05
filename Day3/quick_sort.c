@@ -10,13 +10,13 @@ int partition_count = 0;
 int best_case_partitions = 0;
 int worst_case_partitions = 0;
 
-void swap(int* a, int* b) {
+void swap_1653(int* a, int* b) {
     int temp = *a;
     *a = *b;
     *b = temp;
 }
 
-int partition(int arr[], int low, int high) {
+int partition_1653(int arr[], int low, int high) {
     int pivot = arr[high];
     int i = low - 1;
 
@@ -24,10 +24,10 @@ int partition(int arr[], int low, int high) {
         comparison_count++;
         if (arr[j] < pivot) {
             i++;
-            swap(&arr[i], &arr[j]);
+            swap_1653(&arr[i], &arr[j]);
         }
     }
-    swap(&arr[i + 1], &arr[high]);
+    swap_1653(&arr[i + 1], &arr[high]);
 
     int left = i + 1 - low;
     int right = high - (i + 1);
@@ -42,15 +42,15 @@ int partition(int arr[], int low, int high) {
     return i + 1;
 }
 
-void quickSort(int arr[], int low, int high) {
+void quickSort_1653(int arr[], int low, int high) {
     if (low < high) {
-        int pi = partition(arr, low, high);
-        quickSort(arr, low, pi - 1);
-        quickSort(arr, pi + 1, high);
+        int pi = partition_1653(arr, low, high);
+        quickSort_1653(arr, low, pi - 1);
+        quickSort_1653(arr, pi + 1, high);
     }
 }
 
-int readFromFile(const char* filename, int arr[]) {
+int readFromFile_1653(const char* filename, int arr[]) {
     FILE* file = fopen(filename, "r");
     if (!file) {
         printf("Error opening %s\n", filename);
@@ -63,14 +63,14 @@ int readFromFile(const char* filename, int arr[]) {
     return count;
 }
 
-void writeToFile(const char* filename, int arr[], int size) {
+void writeToFile_1653(const char* filename, int arr[], int size) {
     FILE* file = fopen(filename, "w");
     for (int i = 0; i < size; i++)
         fprintf(file, "%d ", arr[i]);
     fclose(file);
 }
 
-void printArray(int arr[], int size) {
+void printArray_1653(int arr[], int size) {
     int display = (size > 20) ? 20 : size;
     for (int i = 0; i < display; i++)
         printf("%d ", arr[i]);
@@ -79,7 +79,7 @@ void printArray(int arr[], int size) {
     printf("\n");
 }
 
-void generateTestFiles() {
+void generateTestFiles_1653() {
     FILE* f;
     int count;
 
@@ -97,7 +97,7 @@ void generateTestFiles() {
     fclose(f);
 }
 
-const char* determineScenario() {
+const char* determineScenario_1653() {
     if (partition_count == 0) return "N/A";
     float best = (float)best_case_partitions / partition_count;
     float worst = (float)worst_case_partitions / partition_count;
@@ -109,7 +109,7 @@ const char* determineScenario() {
 int main() {
     int arr[MAX_SIZE], size;
     srand(time(NULL));
-    generateTestFiles();
+    generateTestFiles_1653();
 
     while (1) {
         printf("\nMAIN MENU (QUICK SORT)\n");
@@ -139,25 +139,25 @@ int main() {
         if (size == -1) continue;
 
         printf("\nBefore Sorting:\n");
-        printArray(arr, size);
+        printArray_1653(arr, size);
 
         comparison_count = 0;
         partition_count = 0;
         best_case_partitions = 0;
         worst_case_partitions = 0;
 
-        quickSort(arr, 0, size - 1);
+        quickSort_1653(arr, 0, size - 1);
 
         printf("After Sorting:\n");
-        printArray(arr, size);
+        printArray_1653(arr, size);
 
-        writeToFile(out_file, arr, size);
+        writeToFile_1653(out_file, arr, size);
 
         printf("Comparisons: %lld\n", comparison_count);
         printf("Partitions: %d\n", partition_count);
         printf("Best-case Partitions: %d\n", best_case_partitions);
         printf("Worst-case Partitions: %d\n", worst_case_partitions);
-        printf("Scenario: %s\n", determineScenario());
+        printf("Scenario: %s\n", determineScenario_1653());
     }
 
     return 0;

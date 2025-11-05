@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <limits.h>
 
-void findSecondMinMax(int arr[], int n, int *secondMin, int *secondMax) {
+void findSecondMinMax_1653(int arr[], int n, int *secondMin, int *secondMax) {
     if (n < 2) {
         printf("Array must have at least 2 elements\n");
         return;
@@ -59,7 +59,7 @@ int main() {
     fclose(file);
     
     int secondMin, secondMax;
-    findSecondMinMax(arr, n, &secondMin, &secondMax);
+    findSecondMinMax_1653(arr, n, &secondMin, &secondMax);
     
     printf("Second smallest element: %d\n", secondMin);
     printf("Second largest element: %d\n", secondMax);

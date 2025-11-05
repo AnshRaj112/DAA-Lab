@@ -1,13 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void EXCHANGE(int *p, int *q) {
+void EXCHANGE_1653(int *p, int *q) {
     int temp = *p;
     *p = *q;
     *q = temp;
 }
 
-void ROTATE_RIGHT(int *p1, int p2) {
+void ROTATE_RIGHT_1653(int *p1, int p2) {
     if (p2 <= 1) return;
     
     // Store the last element
@@ -15,14 +15,14 @@ void ROTATE_RIGHT(int *p1, int p2) {
     
     // Shift elements to the right
     for (int i = p2 - 1; i > 0; i--) {
-        EXCHANGE(&p1[i], &p1[i-1]);
+        EXCHANGE_1653(&p1[i], &p1[i-1]);
     }
     
     // Put the last element at the beginning
     p1[0] = last;
 }
 
-void printArray(int arr[], int n, char *name) {
+void printArray_1653(int arr[], int n, char *name) {
     printf("%s: ", name);
     for (int i = 0; i < n; i++) {
         printf("%d ", arr[i]);
@@ -56,13 +56,13 @@ int main() {
     fclose(file);
     
     // Display array before rotation
-    printArray(arr, n, "Before ROTATE");
+    printArray_1653(arr, n, "Before ROTATE");
     
     // Perform rotation
-    ROTATE_RIGHT(arr, 5);
+    ROTATE_RIGHT_1653(arr, 5);
     
     // Display array after rotation
-    printArray(arr, n, "After ROTATE");
+    printArray_1653(arr, n, "After ROTATE");
     
     return 0;
 } 

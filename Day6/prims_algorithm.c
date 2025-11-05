@@ -20,7 +20,7 @@ typedef struct {
 } PriorityQueue;
 
 // Function to create a new priority queue
-PriorityQueue* createPriorityQueue(int capacity) {
+PriorityQueue* createPriorityQueue_1653(int capacity) {
     PriorityQueue* pq = (PriorityQueue*)malloc(sizeof(PriorityQueue));
     pq->heap = (PQNode*)malloc(capacity * sizeof(PQNode));
     pq->size = 0;
@@ -29,14 +29,14 @@ PriorityQueue* createPriorityQueue(int capacity) {
 }
 
 // Function to swap two nodes in the heap
-void swap(PQNode* a, PQNode* b) {
+void swap_1653(PQNode* a, PQNode* b) {
     PQNode temp = *a;
     *a = *b;
     *b = temp;
 }
 
 // Function to heapify the priority queue (min-heap)
-void heapify(PriorityQueue* pq, int index) {
+void heapify_1653(PriorityQueue* pq, int index) {
     int smallest = index;
     int left = 2 * index + 1;
     int right = 2 * index + 2;
@@ -48,13 +48,13 @@ void heapify(PriorityQueue* pq, int index) {
         smallest = right;
 
     if (smallest != index) {
-        swap(&pq->heap[index], &pq->heap[smallest]);
-        heapify(pq, smallest);
+        swap_1653(&pq->heap[index], &pq->heap[smallest]);
+        heapify_1653(pq, smallest);
     }
 }
 
 // Function to extract minimum from priority queue
-PQNode extractMin(PriorityQueue* pq) {
+PQNode extractMin_1653(PriorityQueue* pq) {
     if (pq->size == 0) {
         PQNode empty = {-1, -1};
         return empty;
@@ -63,12 +63,12 @@ PQNode extractMin(PriorityQueue* pq) {
     PQNode min = pq->heap[0];
     pq->heap[0] = pq->heap[pq->size - 1];
     pq->size--;
-    heapify(pq, 0);
+    heapify_1653(pq, 0);
     return min;
 }
 
 // Function to decrease key of a vertex in priority queue
-void decreaseKey(PriorityQueue* pq, int vertex, int newKey) {
+void decreaseKey_1653(PriorityQueue* pq, int vertex, int newKey) {
     int i;
     for (i = 0; i < pq->size; i++) {
         if (pq->heap[i].vertex == vertex) {
@@ -76,7 +76,7 @@ void decreaseKey(PriorityQueue* pq, int vertex, int newKey) {
                 pq->heap[i].key = newKey;
                 // Heapify up
                 while (i > 0 && pq->heap[(i - 1) / 2].key > pq->heap[i].key) {
-                    swap(&pq->heap[i], &pq->heap[(i - 1) / 2]);
+                    swap_1653(&pq->heap[i], &pq->heap[(i - 1) / 2]);
                     i = (i - 1) / 2;
                 }
             }
@@ -86,7 +86,7 @@ void decreaseKey(PriorityQueue* pq, int vertex, int newKey) {
 }
 
 // Function to check if vertex is in priority queue
-bool isInQueue(PriorityQueue* pq, int vertex) {
+bool isInQueue_1653(PriorityQueue* pq, int vertex) {
     for (int i = 0; i < pq->size; i++) {
         if (pq->heap[i].vertex == vertex)
             return true;
@@ -95,7 +95,7 @@ bool isInQueue(PriorityQueue* pq, int vertex) {
 }
 
 // Function to get key value of a vertex in priority queue
-int getKey(PriorityQueue* pq, int vertex) {
+int getKey_1653(PriorityQueue* pq, int vertex) {
     for (int i = 0; i < pq->size; i++) {
         if (pq->heap[i].vertex == vertex)
             return pq->heap[i].key;
@@ -104,7 +104,7 @@ int getKey(PriorityQueue* pq, int vertex) {
 }
 
 // Function to add a node to priority queue
-void enqueue(PriorityQueue* pq, int vertex, int key) {
+void enqueue_1653(PriorityQueue* pq, int vertex, int key) {
     if (pq->size >= pq->capacity) return;
     
     pq->heap[pq->size].vertex = vertex;
@@ -114,13 +114,13 @@ void enqueue(PriorityQueue* pq, int vertex, int key) {
     // Heapify up
     int i = pq->size - 1;
     while (i > 0 && pq->heap[(i - 1) / 2].key > pq->heap[i].key) {
-        swap(&pq->heap[i], &pq->heap[(i - 1) / 2]);
+        swap_1653(&pq->heap[i], &pq->heap[(i - 1) / 2]);
         i = (i - 1) / 2;
     }
 }
 
 // Function to read adjacency matrix from file
-void readAdjacencyMatrix(int n, int adj[MAX_VERTICES][MAX_VERTICES], const char* filename) {
+void readAdjacencyMatrix_1653(int n, int adj[MAX_VERTICES][MAX_VERTICES], const char* filename) {
     FILE* file = fopen(filename, "r");
     if (file == NULL) {
         printf("Error: Cannot open file %s\n", filename);
@@ -139,7 +139,7 @@ void readAdjacencyMatrix(int n, int adj[MAX_VERTICES][MAX_VERTICES], const char*
 }
 
 // Prim's algorithm implementation
-void primMST(int n, int adj[MAX_VERTICES][MAX_VERTICES], int start, int mst[MAX_VERTICES][MAX_VERTICES]) {
+void primMST_1653(int n, int adj[MAX_VERTICES][MAX_VERTICES], int start, int mst[MAX_VERTICES][MAX_VERTICES]) {
     int parent[MAX_VERTICES];
     int key[MAX_VERTICES];
     bool inMST[MAX_VERTICES];
@@ -155,32 +155,32 @@ void primMST(int n, int adj[MAX_VERTICES][MAX_VERTICES], int start, int mst[MAX_
     }
     
     // Create priority queue
-    PriorityQueue* pq = createPriorityQueue(n);
+    PriorityQueue* pq = createPriorityQueue_1653(n);
     
     // Initialize starting vertex
     key[start] = 0;
-    enqueue(pq, start, 0);
+    enqueue_1653(pq, start, 0);
     
     // Add all other vertices to priority queue
     for (int i = 0; i < n; i++) {
         if (i != start) {
-            enqueue(pq, i, INF);
+            enqueue_1653(pq, i, INF);
         }
     }
     
     // Prim's algorithm
     while (pq->size > 0) {
-        PQNode minNode = extractMin(pq);
+        PQNode minNode = extractMin_1653(pq);
         int u = minNode.vertex;
         
         inMST[u] = true;
         
         // Update key values and parent indices of adjacent vertices
         for (int v = 0; v < n; v++) {
-            if (adj[u][v] != INF && !inMST[v] && adj[u][v] < getKey(pq, v)) {
+            if (adj[u][v] != INF && !inMST[v] && adj[u][v] < getKey_1653(pq, v)) {
                 parent[v] = u;
                 key[v] = adj[u][v];
-                decreaseKey(pq, v, adj[u][v]);
+                decreaseKey_1653(pq, v, adj[u][v]);
             }
         }
     }
@@ -201,7 +201,7 @@ void primMST(int n, int adj[MAX_VERTICES][MAX_VERTICES], int start, int mst[MAX_
 }
 
 // Function to calculate total weight of MST
-int calculateTotalWeight(int n, int mst[MAX_VERTICES][MAX_VERTICES]) {
+int calculateTotalWeight_1653(int n, int mst[MAX_VERTICES][MAX_VERTICES]) {
     int totalWeight = 0;
     for (int i = 0; i < n; i++) {
         for (int j = i + 1; j < n; j++) {
@@ -214,7 +214,7 @@ int calculateTotalWeight(int n, int mst[MAX_VERTICES][MAX_VERTICES]) {
 }
 
 // Function to display adjacency matrix
-void displayMatrix(int n, int matrix[MAX_VERTICES][MAX_VERTICES]) {
+void displayMatrix_1653(int n, int matrix[MAX_VERTICES][MAX_VERTICES]) {
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < n; j++) {
             printf("%d ", matrix[i][j]);
@@ -236,16 +236,16 @@ int main() {
     start--; // Convert to 0-based indexing
     
     // Read adjacency matrix from file
-    readAdjacencyMatrix(n, adj, "inUnAdjMat.dat");
+    readAdjacencyMatrix_1653(n, adj, "inUnAdjMat.dat");
     
     // Apply Prim's algorithm
-    primMST(n, adj, start, mst);
+    primMST_1653(n, adj, start, mst);
     
     // Display MST adjacency matrix
-    displayMatrix(n, mst);
+    displayMatrix_1653(n, mst);
     
     // Calculate and display total weight
-    int totalWeight_1653 = calculateTotalWeight(n, mst);
+    int totalWeight_1653 = calculateTotalWeight_1653(n, mst);
     printf("Total Weight of the Spanning Tree: %d\n", totalWeight_1653);
     
     return 0;
